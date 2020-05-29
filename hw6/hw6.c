@@ -28,15 +28,15 @@ int main() {
   int row=0;
   // column count
   int col=0;
-  char str[20] = "hw6_data1.txt";
+  char str[20] = "hw6_data.txt";
   fp = fopen(str, "rt");
   printf("file_name : %s\n\n",str);
   if(fp == NULL) {
     printf("==> 파일이 없습니다.\n");
     return 0;
   }
-  printf("input file\n");
-  printf("---------------\n");
+  printf("input file_matrix\n");
+  printf("----------------------------------------\n");
   printf("  ");
   // 한줄 읽기 : 노드의 갯수와 알파벳 종류를 파악한다.
   while((ch=fgetc(fp)) != '\n') {
@@ -94,7 +94,7 @@ int main() {
     }
   }
   fclose(fp);
-  printf("---------------\n");
+  printf("-------------node count : %d-------------\n",length);
   // 기존 matrix의 adjacency list 출력
   printf("Array of adjacency list of above graph\n");
   for(int i=0; i<length; i++) {
@@ -110,7 +110,7 @@ int main() {
     }
     printf("\n");
   }
-  printf("---------------\n");
+  printf("----------------------------------------\n");
   //  adjacency list를 통해 transpose adjacency list를 생성.
   printf("Array of adjacency list of transpose graph\n");
   for(int i=0; i<length; i++) {
@@ -122,6 +122,6 @@ int main() {
     }
     printf("\n");
   }
-  printf("end!");
+  printf("end!\n");
 }
 
