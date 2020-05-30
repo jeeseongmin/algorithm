@@ -1,8 +1,9 @@
+// Error
 #include <stdio.h>
 #include <stdio.h>
 #include <string.h>
 
-// 0과 1인지 체크해주는 함수
+// 
 // 만약 0과 1이 아니라 공백, 탭 등이라면 0을 반환한다.
 int isNum(char ch) {
   // 만약 0과 1이 아니라면,
