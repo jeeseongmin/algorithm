@@ -1,12 +1,11 @@
-// Error
 #include <stdio.h>
 #include <stdio.h>
 #include <string.h>
 
-// 
-// ¸¸¾à 0°ú 1ÀÌ ¾Æ´Ï¶ó °ø¹é, ÅÇ µîÀÌ¶ó¸é 0À» ¹İÈ¯ÇÑ´Ù.
+// 0ê³¼ 1ì¸ì§€ ì²´í¬í•´ì£¼ëŠ” í•¨ìˆ˜
+// ë§Œì•½ 0ê³¼ 1ì´ ì•„ë‹ˆë¼ ê³µë°±, íƒ­ ë“±ì´ë¼ë©´ 0ì„ ë°˜í™˜í•œë‹¤.
 int isNum(char ch) {
-  // ¸¸¾à 0°ú 1ÀÌ ¾Æ´Ï¶ó¸é,
+  // ë§Œì•½ 0ê³¼ 1ì´ ì•„ë‹ˆë¼ë©´,
   if(ch != 48 && ch != 49) {
     return 0;
   }
@@ -14,16 +13,16 @@ int isNum(char ch) {
 
 int main() {
   FILE *fp;
-  // ³ëµåÀÇ ¾ËÆÄºª ¼ø¼­´ë·Î ÀúÀå
+  // ë…¸ë“œì˜ ì•ŒíŒŒë²³ ìˆœì„œëŒ€ë¡œ ì €ì¥
   char alphabet[30];
-  // ÆÄÀÏ Æ÷ÀÎÅÍ¸¦ °¡¸®Å°´Â char
+  // íŒŒì¼ í¬ì¸í„°ë¥¼ ê°€ë¦¬í‚¤ëŠ” char
   char ch;
   int i=0, j=0;
-  // ÃÊ±â matrix
+  // ì´ˆê¸° matrix
   int arr[21][21];
-  // adjacent list¿¡¼­ ÀúÀåÇÑ transpose matrix
+  // adjacent listì—ì„œ ì €ì¥í•œ transpose matrix
   int newarr[21][21] ={0,};
-  // nodeÀÇ °³¼ö
+  // nodeì˜ ê°œìˆ˜
   int length = 0;
   // row count
   int row=0;
@@ -33,86 +32,86 @@ int main() {
   fp = fopen(str, "rt");
   printf("file_name : %s\n\n",str);
   if(fp == NULL) {
-    printf("==> ÆÄÀÏÀÌ ¾ø½À´Ï´Ù.\n");
+    printf("==> íŒŒì¼ì´ ì—†ìŠµë‹ˆë‹¤.\n");
     return 0;
   }
   printf("input file_matrix\n");
   printf("----------------------------------------\n");
   printf("  ");
-  // ÇÑÁÙ ÀĞ±â : ³ëµåÀÇ °¹¼ö¿Í ¾ËÆÄºª Á¾·ù¸¦ ÆÄ¾ÇÇÑ´Ù.
+  // í•œì¤„ ì½ê¸° : ë…¸ë“œì˜ ê°¯ìˆ˜ì™€ ì•ŒíŒŒë²³ ì¢…ë¥˜ë¥¼ íŒŒì•…í•œë‹¤.
   while((ch=fgetc(fp)) != '\n') {
     if(65<=ch && ch<=90) {
       alphabet[col] = ch;
       printf("%c ",alphabet[col]);
       col++;
     }
-    // ¼Ò¹®ÀÚÀÏ °æ¿ì
+    // ì†Œë¬¸ìì¼ ê²½ìš°
     else if(97<=ch && ch<=122) {
       alphabet[col] = ch-32;
       printf("%c ",alphabet[col]);
       col++;
     }
   }
-  // ³ëµåÀÇ °¹¼ö¸¦ length¿¡ ÀúÀå. 
+  // ë…¸ë“œì˜ ê°¯ìˆ˜ë¥¼ lengthì— ì €ì¥.
   length = col;
   printf("\n");
-  /* µğ¹ö±×¿ë_1
+  /* ë””ë²„ê·¸ìš©_1
   for(int i =0; i<col; i++) {
     printf("alphabet[%d] : %c\n",i, alphabet[i]);
   }
 */
   col = 0;
   row++;
-  // ÆÄÀÏÀÌ ³¡³¯¶§±îÁö ÆÄÀÏÆ÷ÀÎÅÍ¸¦ µ¹¸°´Ù.
+  // íŒŒì¼ì´ ëë‚ ë•Œê¹Œì§€ íŒŒì¼í¬ì¸í„°ë¥¼ ëŒë¦°ë‹¤.
   while((ch=fgetc(fp)) != EOF) {
-    // ¹Ø¿¡ ¿£ÅÍ°¡ ´õ ÀÖ´Ù°í ÇÒÁö¶óµµ, ³ëµå °¹¼ö¸¸Å­¸¸ Ã¼Å©ÇÑ´Ù.
+    // ë°‘ì— ì—”í„°ê°€ ë” ìˆë‹¤ê³  í• ì§€ë¼ë„, ë…¸ë“œ ê°¯ìˆ˜ë§Œí¼ë§Œ ì²´í¬í•œë‹¤.
     if(row>length) break;
-    // ÇÑÁÙÀÇ ³¡¿¡ µµ´ŞÇß´Ù¸é, col ÃÊ±âÈ­ ÈÄ, row Áõ°¡
+    // í•œì¤„ì˜ ëì— ë„ë‹¬í–ˆë‹¤ë©´, col ì´ˆê¸°í™” í›„, row ì¦ê°€
     if(ch == '\n') {
       col = 0;
       row++;
       printf("\n");
     }
     else {
-      // ¼¼·Î Ã¹ ÁÙ ¹®ÀÚÀÎ °æ¿ì Á¦¿ÜÇÏ±â À§ÇØ,
-      // ±×¸®°í Ã¹ÁÙÀº ¹«Á¶°Ç 1ºÎÅÍ ½ÃÀÛÇÏ±â ¶§¹®¿¡ row-1ºÎÅÍ ¼¾´Ù.
+      // ì„¸ë¡œ ì²« ì¤„ ë¬¸ìì¸ ê²½ìš° ì œì™¸í•˜ê¸° ìœ„í•´,
+      // ê·¸ë¦¬ê³  ì²«ì¤„ì€ ë¬´ì¡°ê±´ 1ë¶€í„° ì‹œì‘í•˜ê¸° ë•Œë¬¸ì— row-1ë¶€í„° ì„¼ë‹¤.
       if(col == 0) {
         printf("%c ", alphabet[row-1]);
         col++;
         continue;
       }
-      // 0°ú 1ÀÌ ¾Æ´Ï¶ó¸é °ø¹éÀÌ¹Ç·Î °í·ÁÇÏÁö ¾Ê°í continue
+      // 0ê³¼ 1ì´ ì•„ë‹ˆë¼ë©´ ê³µë°±ì´ë¯€ë¡œ ê³ ë ¤í•˜ì§€ ì•Šê³  continue
       if(!isNum(ch)) {
         continue;
       }
-      // 0°ú 1ÀÌ¶ó¸é ¹è¿­¿¡ ÀúÀåÇÏ°í col °ª 1 Áõ°¡.
+      // 0ê³¼ 1ì´ë¼ë©´ ë°°ì—´ì— ì €ì¥í•˜ê³  col ê°’ 1 ì¦ê°€.
       else {
         arr[row-1][col-1] = ch%48;
         printf("%d ", arr[row-1][col-1]);
-        // µğ¹ö±×¿ë_1 : printf("arr[%d][%d] : %d\n", row-1, col-1, arr[row-1][col-1]);
+        // ë””ë²„ê·¸ìš©_1 : printf("arr[%d][%d] : %d\n", row-1, col-1, arr[row-1][col-1]);
         col ++;
       }
     }
   }
   fclose(fp);
   printf("-------------node count : %d-------------\n",length);
-  // ±âÁ¸ matrixÀÇ adjacency list Ãâ·Â
+  // ê¸°ì¡´ matrixì˜ adjacency list ì¶œë ¥
   printf("Array of adjacency list of above graph\n");
   for(int i=0; i<length; i++) {
     printf("[%c] -> ", alphabet[i]);
     for(int j =0; j<length; j++) {
-      // ¸¸¾à matrix °ªÀÌ 1·Î À¯È¿ÇÒ °æ¿ì
+      // ë§Œì•½ matrix ê°’ì´ 1ë¡œ ìœ íš¨í•  ê²½ìš°
       if(arr[i][j] == 1) {
-        // transpose matrix·Î 1 ÀúÀå.
+        // transpose matrixë¡œ 1 ì €ì¥.
         newarr[j][i] = 1;
-        // ±âÁ¸ matrix ³»¿ëÀ» Ãâ·ÂÇØÁÖ´Â ÇÔ¼ö.
+        // ê¸°ì¡´ matrix ë‚´ìš©ì„ ì¶œë ¥í•´ì£¼ëŠ” í•¨ìˆ˜.
         printf("%c ", alphabet[j]);
       }
     }
     printf("\n");
   }
   printf("----------------------------------------\n");
-  //  adjacency list¸¦ ÅëÇØ transpose adjacency list¸¦ »ı¼º.
+  //  adjacency listë¥¼ í†µí•´ transpose adjacency listë¥¼ ìƒì„±.
   printf("Array of adjacency list of transpose graph\n");
   for(int i=0; i<length; i++) {
     printf("[%c] -> ", alphabet[i]);
@@ -125,4 +124,3 @@ int main() {
   }
   printf("end!\n");
 }
-
