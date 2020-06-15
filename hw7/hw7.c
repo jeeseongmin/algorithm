@@ -5,7 +5,8 @@ int main() {
 	int b;
 	int c;
 	printf("hw7 homework\n");
-
+	
+	return 0;
 
 
 }
